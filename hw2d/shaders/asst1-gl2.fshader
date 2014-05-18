@@ -1,4 +1,5 @@
 uniform float uVertexScale;
+uniform float uAspectRatio;
 uniform sampler2D uTexUnit0, uTexUnit1;
 
 varying vec2 vTexCoord0, vTexCoord1;

@@ -46,13 +46,14 @@ using namespace std;      // for string, vector, iostream and other standard C++
 static const bool g_Gl2Compatible = true;
 
 
-static int g_width             = 512;       // screen width
-static int g_height            = 512;       // screen height
-static bool g_leftClicked      = false;     // is the left mouse button down?
-static bool g_rightClicked     = false;     // is the right mouse button down?
-static float g_objScale        = 1.0;       // scale factor for object
-static int g_leftClickX, g_leftClickY;      // coordinates for mouse left click event
-static int g_rightClickX, g_rightClickY;    // coordinates for mouse right click event
+static int g_width              = 512;        // screen width
+static int g_height             = 512;        // screen height
+static bool g_leftClicked       = false;      // is the left mouse button down?
+static bool g_rightClicked      = false;      // is the right mouse button down?
+static float g_objScale         = 1.0;        // scale factor for object
+static float g_aspectScale[2] = {1.0, 1.0};   // scale to account for screen aspect ratio
+static int g_leftClickX, g_leftClickY;        // coordinates for mouse left click event
+static int g_rightClickX, g_rightClickY;      // coordinates for mouse right click event
 
 struct ShaderState {
   GlProgram program;
@@ -60,6 +61,7 @@ struct ShaderState {
   // Handles to uniform variables
   GLint h_uVertexScale;
   GLint h_uTexUnit0, h_uTexUnit1;
+  GLint h_uAspectScale;
 
   // Handles to vertex attributes
   GLint h_aPosition;
@@ -75,6 +77,7 @@ struct ShaderState {
     h_uVertexScale = safe_glGetUniformLocation(h, "uVertexScale");
     h_uTexUnit0 = safe_glGetUniformLocation(h, "uTexUnit0");
     h_uTexUnit1 = safe_glGetUniformLocation(h, "uTexUnit1");
+    h_uAspectScale = safe_glGetUniformLocation(h, "uAspectScale");
 
     // Retrieve handles to vertex attributes
     h_aPosition = safe_glGetAttribLocation(h, "aPosition");
@@ -217,6 +220,7 @@ static void display(void) {
   safe_glUniform1i(curSS.h_uTexUnit0, 0);
   safe_glUniform1i(curSS.h_uTexUnit1, 1);
   safe_glUniform1f(curSS.h_uVertexScale, g_objScale);
+  safe_glUniform2f(curSS.h_uAspectScale, g_aspectScale[0], g_aspectScale[1]);
   g_square->draw(curSS);
 
   glutSwapBuffers();
@@ -239,6 +243,8 @@ static void reshape(int w, int h) {
   g_width = w;
   g_height = h;
   glViewport(0, 0, w, h);
+  g_aspectScale[0] = w > h ? float(w)/h : 1.0;
+  g_aspectScale[1] = h > w ? float(h)/w : 1.0;
   glutPostRedisplay();
 }
 

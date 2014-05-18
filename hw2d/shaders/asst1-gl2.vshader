@@ -1,3 +1,7 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
 uniform float uVertexScale;
 uniform vec2 uAspectScale;
 

@@ -1,3 +1,7 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
 uniform float uVertexScale;
 uniform float uAspectRatio;
 uniform sampler2D uTexUnit0, uTexUnit1;

@@ -10,9 +10,9 @@
 #include <string>
 #include <memory>
 #include <stdexcept>
-#if __GNUG__
-#   include <tr1/memory>
-#endif
+//#if __GNUG__
+//#   include <tr1/memory>
+//#endif
 
 #include <GL/glew.h>
 #ifdef __MAC__
@@ -25,7 +25,7 @@
 #include "glsupport.h"
 
 using namespace std;      // for string, vector, iostream and other standard C++ stuff
-using namespace std::tr1; // for shared_ptr
+//using namespace std::tr1; // for shared_ptr
 
 // G L O B A L S ///////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@ using namespace std::tr1; // for shared_ptr
 // If g_Gl2Compatible=false, shaders with -gl3 suffix will be loaded.
 // To complete the assignment you only need to edit the shader files that get loaded
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-static const bool g_Gl2Compatible = false;
+static const bool g_Gl2Compatible = true;
 
 
 static int g_width             = 512;       // screen width

@@ -180,97 +180,6 @@ function SquareGeometry() {
 
 var g_square;
 
-// struct SquareGeometry {
-//   GlBufferObject posVbo, texVbo, colVbo;
-
-//   SquareGeometry() {
-//     static GLfloat sqPos[12] = {
-//       -.5, -.5,
-//       .5,  .5,
-//       .5,  -.5,
-
-//       -.5, -.5,
-//       -.5, .5,
-//       .5,  .5
-//     };
-
-//     static GLfloat sqTex[12] = {
-//       0, 0,
-//       1, 1,
-//       1, 0,
-
-//       0, 0,
-//       0, 1,
-//       1, 1
-//     };
-
-//     static GLfloat sqCol[18] =  {
-//       1, 0, 0,
-//       0, 1, 1,
-//       0, 0, 1,
-
-//       1, 0, 0,
-//       0, 1, 0,
-//       0, 1, 1
-//     };
-
-//     glBindBuffer(GL_ARRAY_BUFFER, posVbo);
-//     glBufferData(
-//       GL_ARRAY_BUFFER,
-//       12*sizeof(GLfloat),
-//       sqPos,
-//       GL_STATIC_DRAW);
-//     checkGlErrors();
-
-//     glBindBuffer(GL_ARRAY_BUFFER, texVbo);
-//     glBufferData(
-//       GL_ARRAY_BUFFER,
-//       12*sizeof(GLfloat),
-//       sqTex,
-//       GL_STATIC_DRAW);
-//     checkGlErrors();
-
-//     glBindBuffer(GL_ARRAY_BUFFER, colVbo);
-//     glBufferData(
-//       GL_ARRAY_BUFFER,
-//       18*sizeof(GLfloat),
-//       sqCol,
-//       GL_STATIC_DRAW);
-//     checkGlErrors();
-//   }
-
-//   void draw(const ShaderState& curSS) {
-//     int numverts=6;
-//     safe_glEnableVertexAttribArray(curSS.h_aPosition);
-//     safe_glEnableVertexAttribArray(curSS.h_aTexCoord0);
-//     safe_glEnableVertexAttribArray(curSS.h_aTexCoord1);
-//     safe_glEnableVertexAttribArray(curSS.h_aColor);
-
-//     glBindBuffer(GL_ARRAY_BUFFER, posVbo);
-//     safe_glVertexAttribPointer(curSS.h_aPosition,
-//                                2, GL_FLOAT, GL_FALSE, 0, 0);
-
-//     glBindBuffer(GL_ARRAY_BUFFER, texVbo);
-//     safe_glVertexAttribPointer(curSS.h_aTexCoord0,
-//                                2, GL_FLOAT, GL_FALSE, 0, 0);
-
-//     glBindBuffer(GL_ARRAY_BUFFER, texVbo);
-//     safe_glVertexAttribPointer(curSS.h_aTexCoord1,
-//                                2, GL_FLOAT, GL_FALSE, 0, 0);
-
-//     glBindBuffer(GL_ARRAY_BUFFER, colVbo);
-//     safe_glVertexAttribPointer(curSS.h_aColor,
-//                                3, GL_FLOAT, GL_FALSE, 0, 0);
-
-//     glDrawArrays(GL_TRIANGLES,0,numverts);
-
-//     safe_glDisableVertexAttribArray(curSS.h_aPosition);
-//     safe_glDisableVertexAttribArray(curSS.h_aColor);
-//     safe_glDisableVertexAttribArray(curSS.h_aTexCoord0);
-//     safe_glDisableVertexAttribArray(curSS.h_aTexCoord1);
-//   }
-// };
-
 // // C A L L B A C K S ///////////////////////////////////////////////////
 
 // // _____________________________________________________
@@ -370,7 +279,6 @@ function motion(x, y) {
     g_rightClickY = newy;
   }
 
-//   glutPostRedisplay();
   window.requestAnimationFrame(display);
 }
 
@@ -417,11 +325,7 @@ function initBrowserState() {
     });
 
     window.addEventListener('mouseup', function(e) {
-        g_leftClicked, g_rightClicked = false;
-    });
-
-    window.addEventListener('keypress', function(e) {
-        motion(e.pageX, e.pageY);
+        g_leftClicked = g_rightClicked = false;
     });
 
     document.addEventListener('contextmenu', function(e) {

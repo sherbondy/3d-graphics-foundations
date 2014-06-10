@@ -11,24 +11,24 @@ ifeq ($(OS), Linux) # Science Center Linux Boxes
 endif
 
 ifeq ($(OS), Darwin) # Assume OS X
-  CPPFLAGS += -D__MAC__
-  LDFLAGS += -framework GLUT -framework OpenGL
+  CPPFLAGS += -D__MAC__ -I/usr/local/include
+  LDFLAGS += -framework GLUT -framework OpenGL -L/usr/local/lib
 endif
 
-ifdef OPT 
+ifdef OPT
   #turn on optimization
   CXXFLAGS += -O2
-else 
+else
   #turn on debugging
   CXXFLAGS += -g
 endif
 
-CXX = g++ 
+CXX = g++
 
 OBJ = $(BASE).o ppm.o glsupport.o
 
 $(BASE): $(OBJ)
-	$(LINK.cpp) -o $@ $^ $(LIBS) -lGLEW 
+	$(LINK.cpp) -o $@ $^ $(LIBS) -lGLEW
 
 clean:
 	rm -f $(OBJ) $(BASE)
